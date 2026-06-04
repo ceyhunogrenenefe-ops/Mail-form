@@ -111,6 +111,19 @@
   }
   .joinbtn:hover{background:var(--navy-2)}
   .joinbtn svg{width:20px;height:20px;fill:#fff}
+  .copyrow{display:flex;gap:8px;margin-top:10px}
+  .copyrow input{
+    flex:1;font-family:inherit;font-size:12.5px;color:var(--muted);
+    background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 11px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .copyrow button{
+    flex:none;font-family:inherit;font-size:13.5px;font-weight:700;color:#fff;
+    background:var(--navy);border:none;border-radius:9px;padding:0 16px;cursor:pointer;
+    transition:background .15s;
+  }
+  .copyrow button:hover{background:var(--navy-2)}
+  .copyrow button.copied{background:var(--ok)}
   .codes{display:flex;gap:12px;margin-top:14px}
   .codes div{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
   .codes span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
@@ -189,6 +202,10 @@
           <svg viewBox="0 0 24 24"><path d="M4 6h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm15 3 3-2v10l-3-2z"/></svg>
           Zoom ile Katıl
         </a>
+        <div class="copyrow">
+          <input type="text" id="zoomUrlField" readonly>
+          <button type="button" id="copyBtn">Kopyala</button>
+        </div>
         <div class="codes">
           <div><span>Toplantı ID</span><b>694 633 7643</b></div>
           <div><span>Giriş Kodu</span><b>152535</b></div>
@@ -274,6 +291,7 @@
 
     document.getElementById('okName').textContent=data.ad_soyad;
     document.getElementById('zoomLink').href=ZOOM_LINK;
+    document.getElementById('zoomUrlField').value=ZOOM_LINK;
 
     // Takvim (.ics) — 6 Haziran 2026, 18:30 (TRT, UTC+3) → 15:30 UTC
     const ics=[
@@ -290,6 +308,23 @@
     document.getElementById('formWrap').style.display='none';
     document.getElementById('success').classList.add('show');
     window.scrollTo(0,0);
+  });
+
+  // Zoom linkini kopyala
+  document.getElementById('copyBtn').addEventListener('click', async function(){
+    const url = document.getElementById('zoomUrlField').value;
+    const btn = this;
+    try{
+      await navigator.clipboard.writeText(url);
+    }catch(e){
+      const f = document.getElementById('zoomUrlField');
+      f.select(); f.setSelectionRange(0,99999);
+      document.execCommand('copy');
+    }
+    const old = btn.textContent;
+    btn.textContent = 'Kopyalandı ✓';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=old;btn.classList.remove('copied');},1800);
   });
 </script>
 </body>
