@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sınav Stresi Semineri — Kayıt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b1e4f;
+    --navy-2:#13286b;
+    --red:#e01f26;
+    --red-dark:#bd1219;
+    --bg:#eef2f8;
+    --paper:#ffffff;
+    --line:#dfe5ee;
+    --muted:#6b7587;
+    --ink:#152138;
+    --ok:#1d8a4e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Archivo',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+    background-image:radial-gradient(circle at 12% 8%,rgba(11,30,79,.07),transparent 42%),radial-gradient(circle at 90% 95%,rgba(224,31,38,.06),transparent 45%);
+  }
+  .card{
+    width:100%;max-width:540px;
+    background:var(--paper);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 26px 60px -28px rgba(11,30,79,.5);
+  }
+  /* header */
+  .hero{
+    background:linear-gradient(155deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;padding:30px 32px 26px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+  }
+  .brand{font-weight:800;font-size:13px;letter-spacing:.04em;margin-bottom:18px}
+  .brand b{color:var(--red)}
+  .hero h1{
+    font-family:'Anton',sans-serif;font-weight:400;
+    font-size:38px;line-height:.98;letter-spacing:.01em;text-transform:uppercase;
+  }
+  .hero h1 .r{color:#ff5a60}
+  .tag{margin-top:12px;font-size:14.5px;color:#c7d2ec;max-width:40ch;line-height:1.45}
+  .meta{display:flex;gap:22px;margin-top:20px;flex-wrap:wrap}
+  .meta div{font-size:13px;color:#aebbdc;line-height:1.3}
+  .meta b{display:block;font-size:17px;color:#fff;font-weight:700;letter-spacing:.02em}
+  .free{
+    display:inline-block;margin-top:18px;background:var(--red);color:#fff;
+    font-weight:800;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:7px 14px;border-radius:8px;
+  }
+  /* form */
+  form{padding:26px 32px 32px}
+  .field{margin-bottom:16px}
+  label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+  label .req{color:var(--red)}
+  input,select{
+    width:100%;font-family:inherit;font-size:15px;color:var(--ink);
+    background:#f6f8fc;border:1.5px solid var(--line);border-radius:10px;padding:12px 13px;
+    transition:border-color .15s,box-shadow .15s,background .15s;
+  }
+  input:focus,select:focus{
+    outline:none;border-color:var(--navy);background:#fff;
+    box-shadow:0 0 0 3px rgba(11,30,79,.13);
+  }
+  .row{display:flex;gap:14px}
+  .row .field{flex:1}
+  .err-msg{display:none;color:var(--red);font-size:12px;margin-top:5px;font-weight:600}
+  .field.invalid input,.field.invalid select{border-color:var(--red);box-shadow:0 0 0 3px rgba(224,31,38,.12)}
+  .field.invalid .err-msg{display:block}
+  button.submit{
+    width:100%;margin-top:6px;font-family:'Archivo',sans-serif;font-size:16px;font-weight:800;
+    letter-spacing:.04em;text-transform:uppercase;color:#fff;
+    background:var(--red);border:none;border-radius:12px;padding:16px;cursor:pointer;
+    transition:background .15s,transform .08s;
+  }
+  button.submit:hover{background:var(--red-dark)}
+  button.submit:active{transform:translateY(1px)}
+  .priv{margin-top:13px;text-align:center;font-size:12px;color:var(--muted)}
+  /* success */
+  .success{display:none;padding:34px 32px 36px;text-align:center}
+  .success.show{display:block}
+  .tick{width:62px;height:62px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .tick svg{width:30px;height:30px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .success h2{font-family:'Anton',sans-serif;font-weight:400;font-size:30px;text-transform:uppercase;letter-spacing:.01em}
+  .success .hi{color:var(--muted);font-size:15px;margin-top:8px}
+  .success .hi b{color:var(--ink)}
+  .joinbox{
+    margin:22px 0 6px;background:#f6f8fc;border:1.5px solid var(--line);border-radius:14px;
+    padding:20px;text-align:left;
+  }
+  .joinbox .ev{font-weight:800;font-size:15px;color:var(--navy);margin-bottom:4px}
+  .joinbox .dt{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+  .joinbtn{
+    display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    background:var(--navy);color:#fff;text-decoration:none;font-weight:800;font-size:15.5px;
+    padding:14px;border-radius:11px;transition:background .15s;
+  }
+  .joinbtn:hover{background:var(--navy-2)}
+  .joinbtn svg{width:20px;height:20px;fill:#fff}
+  .codes{display:flex;gap:12px;margin-top:14px}
+  .codes div{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .codes span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .codes b{font-size:16px;letter-spacing:.03em;color:var(--ink)}
+  .ics{
+    display:inline-block;margin-top:16px;font-size:13.5px;font-weight:700;color:var(--navy);
+    text-decoration:none;border:1.5px solid var(--line);border-radius:9px;padding:10px 18px;
+  }
+  .ics:hover{background:#f6f8fc}
+  @media(max-width:500px){
+    .hero{padding:26px 22px}.hero h1{font-size:32px}form,.success{padding-left:22px;padding-right:22px}
+    .row{flex-direction:column;gap:0}.meta{gap:16px}
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- FORM -->
+    <div id="formWrap">
+      <div class="hero">
+        <div class="brand">online <b>vip</b> dershane</div>
+        <h1>Sınav <span class="r">Stresi</span><br>Başarını Engellemesin!</h1>
+        <p class="tag">Sınav kaygısını yönetmeyi ve gerçek potansiyelini ortaya çıkarmayı öğren.</p>
+        <div class="meta">
+          <div>Tarih<b>6 Haziran Cmt.</b></div>
+          <div>Saat<b>18.30</b></div>
+          <div>Konuşmacı<b>Eda Aktürk</b></div>
+        </div>
+        <span class="free">★ Ücretsiz Katılım</span>
+      </div>
+
+      <form id="regForm" novalidate>
+        <div class="field" id="f-name">
+          <label for="name">Ad Soyad <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="Adınız ve soyadınız" autocomplete="name">
+          <div class="err-msg">Lütfen adınızı ve soyadınızı girin.</div>
+        </div>
+        <div class="field" id="f-email">
+          <label for="email">E-posta <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="ornek@eposta.com" autocomplete="email">
+          <div class="err-msg">Geçerli bir e-posta adresi girin.</div>
+        </div>
+        <div class="row">
+          <div class="field" id="f-phone">
+            <label for="phone">Telefon <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="05XX XXX XX XX" autocomplete="tel">
+            <div class="err-msg">Geçerli bir telefon numarası girin.</div>
+          </div>
+          <div class="field" id="f-type">
+            <label for="ptype">Katılımcı <span class="req">*</span></label>
+            <select id="ptype">
+              <option value="">Seçiniz…</option>
+              <option>Öğrenci</option>
+              <option>Veli</option>
+              <option>Öğretmen</option>
+            </select>
+            <div class="err-msg">Lütfen seçim yapın.</div>
+          </div>
+        </div>
+        <button type="submit" class="submit">Yerini Hemen Ayırt 🚀</button>
+        <p id="formError" style="display:none;margin-top:12px;text-align:center;color:#e01f26;font-size:13px;font-weight:600">Kayıt sırasında bir sorun oluştu. Lütfen tekrar deneyin.</p>
+        <p class="priv">Bilgileriniz yalnızca seminer organizasyonu için kullanılır.</p>
+      </form>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <div class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg></div>
+      <h2>Kaydın Tamamlandı!</h2>
+      <p class="hi">Tebrikler <b id="okName"></b>, yerin ayrıldı.<br>Zoom bağlantın hazır — aşağıdan katılabilir, takvimine ekleyebilirsin.</p>
+
+      <div class="joinbox">
+        <div class="ev">Sınav Stresi Başarını Engellemesin!</div>
+        <div class="dt">6 Haziran Cumartesi · Saat 18.30 · Eda Aktürk</div>
+        <a class="joinbtn" id="zoomLink" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M4 6h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm15 3 3-2v10l-3-2z"/></svg>
+          Zoom ile Katıl
+        </a>
+        <div class="codes">
+          <div><span>Toplantı ID</span><b>694 633 7643</b></div>
+          <div><span>Giriş Kodu</span><b>152535</b></div>
+        </div>
+      </div>
+      <a class="ics" id="icsBtn" href="#">📅 Takvime Ekle</a>
+    </div>
+  </div>
+
+<script>
+  /* ===== ZOOM BAĞLANTISI =====
+     Aşağıdaki linki, Zoom hesabındaki GERÇEK "tek tıkla katıl" linkiyle değiştir.
+     (Zoom > Toplantılar > toplantını seç > "Davet bağlantısını kopyala")
+     Şu an Toplantı ID'sine göre genel bir bağlantı kullanılıyor;
+     kişiler bağlandığında Giriş Kodu (152535) istenebilir. */
+  const ZOOM_LINK = "https://us06web.zoom.us/j/6946337643?pwd=SHkwQzNnaEkrOXVNajJMR1Z6UCtCUT09";
+
+  /* ===== Supabase (kayıtlar buraya yazılır) ===== */
+  const SUPABASE_URL = "https://qwbckutxfmhnwfkljjpd.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_JD6baJE41RAq_yI9RcD1yg_i5nXbw-e";
+
+  const form = document.getElementById('regForm');
+  const fields = {
+    name:  {wrap:'f-name',  el:'name',  test:v=>v.trim().length>=3},
+    email: {wrap:'f-email', el:'email', test:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())},
+    phone: {wrap:'f-phone', el:'phone', test:v=>{const d=v.replace(/\D/g,'');return d.length>=10&&d.length<=13;}},
+    type:  {wrap:'f-type',  el:'ptype', test:v=>v!==''},
+  };
+
+  function check(k){
+    const f=fields[k];
+    const ok=f.test(document.getElementById(f.el).value);
+    document.getElementById(f.wrap).classList.toggle('invalid',!ok);
+    return ok;
+  }
+  Object.keys(fields).forEach(k=>{
+    const i=document.getElementById(fields[k].el);
+    i.addEventListener('blur',()=>check(k));
+    i.addEventListener('input',()=>{if(document.getElementById(fields[k].wrap).classList.contains('invalid'))check(k);});
+  });
+
+  const submitBtn = form.querySelector('button.submit');
+  const errBox = document.getElementById('formError');
+
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    errBox.style.display='none';
+    let ok=true;
+    Object.keys(fields).forEach(k=>{if(!check(k))ok=false;});
+    if(!ok){const f=document.querySelector('.field.invalid input,.field.invalid select');if(f)f.focus();return;}
+
+    const data = {
+      ad_soyad: document.getElementById('name').value.trim(),
+      email:    document.getElementById('email').value.trim(),
+      telefon:  document.getElementById('phone').value.trim(),
+      katilimci_tipi: document.getElementById('ptype').value
+    };
+
+    // Supabase'e kaydet
+    submitBtn.disabled = true;
+    const oldLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Kaydediliyor…';
+    try{
+      const res = await fetch(SUPABASE_URL + '/rest/v1/seminer_kayitlari', {
+        method:'POST',
+        headers:{
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) throw new Error('save_failed');
+    }catch(err){
+      submitBtn.disabled = false;
+      submitBtn.textContent = oldLabel;
+      errBox.style.display = 'block';
+      return;
+    }
+    submitBtn.disabled = false;
+    submitBtn.textContent = oldLabel;
+
+    document.getElementById('okName').textContent=data.ad_soyad;
+    document.getElementById('zoomLink').href=ZOOM_LINK;
+
+    // Takvim (.ics) — 6 Haziran 2026, 18:30 (TRT, UTC+3) → 15:30 UTC
+    const ics=[
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//OnlineVipDershane//TR',
+      'BEGIN:VEVENT',
+      'DTSTART:20260606T153000Z','DTEND:20260606T170000Z',
+      'SUMMARY:Sınav Stresi Başarını Engellemesin! (Online Seminer)',
+      'DESCRIPTION:Konuşmacı Eda Aktürk\\nZoom: '+ZOOM_LINK+'\\nToplantı ID: 694 633 7643\\nGiriş Kodu: 152535',
+      'LOCATION:Zoom Online','END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    document.getElementById('icsBtn').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+    document.getElementById('icsBtn').setAttribute('download','sinav-stresi-semineri.ics');
+
+    document.getElementById('formWrap').style.display='none';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo(0,0);
+  });
+</script>
+</body>
+</html>
