@@ -145,11 +145,11 @@
     <div id="formWrap">
       <div class="hero">
         <div class="brand">online <b>vip</b> dershane</div>
-        <h1>Sınav <span class="r">Stresi</span><br>Başarını Engellemesin!</h1>
+        <h1>YKS Sınav <span class="r">Stresi</span><br>Başarını Etkilemesin!</h1>
         <p class="tag">Sınav kaygısını yönetmeyi ve gerçek potansiyelini ortaya çıkarmayı öğren.</p>
         <div class="meta">
-          <div>Tarih<b>6 Haziran Cmt.</b></div>
-          <div>Saat<b>18.30</b></div>
+          <div>Tarih<b>13 Haziran Cmt.</b></div>
+          <div>Saat<b>20.30</b></div>
           <div>Konuşmacı<b>Eda Aktürk</b></div>
         </div>
         <span class="free">★ Ücretsiz Katılım</span>
@@ -213,8 +213,8 @@
       <p class="hi">Tebrikler <b id="okName"></b>, yerin ayrıldı.<br>Zoom bağlantın hazır — aşağıdan katılabilir, takvimine ekleyebilirsin.</p>
 
       <div class="joinbox">
-        <div class="ev">Sınav Stresi Başarını Engellemesin!</div>
-        <div class="dt">6 Haziran Cumartesi · Saat 18.30 · Eda Aktürk</div>
+        <div class="ev">YKS Sınav Stresi Başarını Etkilemesin!</div>
+        <div class="dt">13 Haziran Cumartesi · Saat 20.30 · Eda Aktürk</div>
         <a class="joinbtn" id="zoomLink" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M4 6h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm15 3 3-2v10l-3-2z"/></svg>
           Zoom ile Katıl
@@ -224,7 +224,7 @@
           <button type="button" id="copyBtn">Kopyala</button>
         </div>
         <div class="codes">
-          <div><span>Toplantı ID</span><b>694 633 7643</b></div>
+          <div><span>Toplantı ID</span><b>516 957 5479</b></div>
           <div><span>Giriş Kodu</span><b>152535</b></div>
         </div>
       </div>
@@ -238,7 +238,7 @@
      (Zoom > Toplantılar > toplantını seç > "Davet bağlantısını kopyala")
      Şu an Toplantı ID'sine göre genel bir bağlantı kullanılıyor;
      kişiler bağlandığında Giriş Kodu (152535) istenebilir. */
-  const ZOOM_LINK = "https://us06web.zoom.us/j/6946337643?pwd=SHkwQzNnaEkrOXVNajJMR1Z6UCtCUT09";
+  const ZOOM_LINK = "https://us06web.zoom.us/j/5169575479?pwd=U06749BlwfxKNn9vcBlOPk8I8GO3bh.1";
 
   /* ===== Supabase (kayıtlar buraya yazılır) ===== */
   const SUPABASE_URL = "https://qwbckutxfmhnwfkljjpd.supabase.co";
@@ -315,9 +315,9 @@
     const ics=[
       'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//OnlineVipDershane//TR',
       'BEGIN:VEVENT',
-      'DTSTART:20260606T153000Z','DTEND:20260606T170000Z',
-      'SUMMARY:Sınav Stresi Başarını Engellemesin! (Online Seminer)',
-      'DESCRIPTION:Konuşmacı Eda Aktürk\\nZoom: '+ZOOM_LINK+'\\nToplantı ID: 694 633 7643\\nGiriş Kodu: 152535',
+      'DTSTART:20260613T173000Z','DTEND:20260613T190000Z',
+      'SUMMARY:YKS Sınav Stresi Başarını Etkilemesin! (Online Seminer)',
+      'DESCRIPTION:Konuşmacı Eda Aktürk\\nZoom: '+ZOOM_LINK+'\\nToplantı ID: 516 957 5479\\nGiriş Kodu: 152535',
       'LOCATION:Zoom Online','END:VEVENT','END:VCALENDAR'
     ].join('\r\n');
     document.getElementById('icsBtn').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
